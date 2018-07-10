@@ -1,0 +1,25 @@
+import sys
+
+from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QDesktopWidget
+from PyQt5.QtCore import Qt
+
+class MainWindow(QMainWindow):
+    def __init__(self, *args, **kwargs):
+        super(MainWindow, self).__init__(*args, **kwargs)
+        self.setWindowTitle("qt5 with python")
+        self.setGeometry(0, 0, 512, 512)
+
+        # center window on desktop
+        rectangle = self.frameGeometry()
+        center = QDesktopWidget().availableGeometry().center()
+        rectangle.moveCenter(center)
+        self.move(rectangle.topLeft())
+
+        label = QLabel("label text")
+        label.setAlignment(Qt.AlignCenter)
+        self.setCentralWidget(label)
+
+app = QApplication(sys.argv)
+window = MainWindow()
+window.show()
+app.exec_()
